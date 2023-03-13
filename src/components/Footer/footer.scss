@@ -1,0 +1,154 @@
+@import '../util';
+
+footer{
+    width: 100%;
+    min-height: 150vh;
+    // background-color: yellow;
+    position: relative;
+    @include flex(space-between,center,column);
+    padding-top:20vmin;
+    #Layer_1{
+        width:100%;
+        height: 100%;
+        // background-color: red;
+        position: absolute;
+        bottom:0;
+
+        path{
+            // background-color: blue;
+        }
+    }
+    #nMail{
+        @include flex;
+            width: 100%;
+            border-radius: 2em;
+            background-color: #ffffff1a;
+            padding: .5em 1em;
+            input{
+                background-color: transparent;
+                border:none;
+                width: 90%;
+                outline: none;
+                &::placeholder{
+                    color:var(--action2);
+                }
+            }
+    }
+    #f1{
+        width: 100%;
+        height: 25vmin;
+        @include flex(center,center,column);
+        // background-color: yellow;
+        position: relative;
+        z-index: 2;
+        .fcenter{
+            width:50%;
+            height: inherit;
+        @include flex(space-around,center,column);
+
+            h3{
+            color:var(--primTxt);
+            width: 100%;
+            font-family: $logo;
+            font-weight: 100;
+            letter-spacing: .1em;
+            margin-top: 5vmin;
+            text-align: left;
+            // background-color: red;
+        }
+        >div{
+            width:80%;
+            height: 50%;
+            margin-top: 2em;
+            // background-color: red;
+            p{
+                color:var(--primTxt);
+                margin-top: 5vmin;
+                font-size: .7em;
+                font-weight: 200;
+                letter-spacing: .1em;
+                line-height: 1.6em;
+                // text-align: right;
+                width: 100%;
+                margin-left: 5vmin;
+            }
+        }
+        }
+        
+    }
+    #f2{
+        width: 100%;
+        height: 80vmin;
+        // background-color: red;
+        position: relative;
+        z-index: 2;
+        @include flex;
+        padding: 0 10vmin;
+        #flft{
+            width:40%;
+            height: inherit;
+            // background-color: yellow;
+            @include flex(space-between,flex-start,column);
+            padding: 15vmin 0;
+            .logo{
+                // background-color: red;
+                font-size: 30px;
+            }
+            >p{
+                color:var(--secTxt);
+                line-height: 1.8em;
+                font-size: .8em;
+                width: 80%;
+                letter-spacing: .1em;
+
+
+            }
+            .fIcons{
+                @include flex;
+                // background-color: black;
+                width: 30%;
+            }
+            >h6{
+                font-size: .7em;
+                color:var(--secTxt);
+                width: 80%;
+                font-weight: 400;
+                letter-spacing: .1em;
+
+            }
+        }
+        #frt{
+            width: 60%;
+            height: inherit;
+            // background-color: blue;
+            @include flex(center);
+            #fcenter{
+                // background-color: yellow;
+                height: 30vmin;
+                width: 100%;
+                @include flex(space-between,flex-start);
+                .felm{
+                    height: inherit;
+                    @include flex(space-between,flex-start,column);
+                    h3{
+                        font-family: $logo;
+                        color:var(--primTxt);
+                        font-size: 1.3em;
+                        font-weight: 100;
+                        letter-spacing: .1em;
+                        margin-bottom: 1.5em;
+                    }
+                    a{
+                        text-decoration: none;
+                        color:var(--primTxt);
+                        text-transform: uppercase;
+                        font-size: .9em;
+                        font-weight: 300;
+                        
+                    }
+                }
+            }
+        }
+
+    }
+}

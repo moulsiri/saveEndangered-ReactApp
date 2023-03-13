@@ -1,0 +1,51 @@
+@import '../../util';
+#a-hero{
+    width: 100%;
+    height: 80vh;
+    // background-color: rgb(175, 130, 130);
+    padding: 10vmin 10vmin 0vmin 10vmin;
+    @include flex(center,center,column);
+    .a-prt{
+        width: 80%;
+        height: 10%;
+        position: relative;
+        // background-color: red;
+        &:last-child{
+            background-color: #ffffff0e;
+            height: 90%;
+            width: 100%;
+        }
+        .MuiOutlinedInput-notchedOutline {
+            border-color: transparent !important;
+            // background-color: #fff !important ;
+          }
+
+    }
+}
+.c-ovly{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 3;
+    // backdrop-filter: blur(5px);
+}
+
+#article-page{
+    width: 100%;
+    min-height: 100vh;
+    // background-color: red;
+    position: relative;
+    z-index: 3;
+    
+}
+#write-now{
+    width: 30vmax;
+    height: 80vh;
+    background-color: yellow;
+    position: sticky;
+    // right:0;
+    top:20%;
+    // margin-top: -50%;
+    margin-right: 0;
+    z-index: 8;
+}
