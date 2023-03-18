@@ -1,26 +1,44 @@
 @import '../../util';
-#a-hero{
-    width: 100%;
-    height: 80vh;
-    // background-color: rgb(175, 130, 130);
-    padding: 10vmin 10vmin 0vmin 10vmin;
-    @include flex(center,center,column);
-    .a-prt{
-        width: 80%;
-        height: 10%;
-        position: relative;
-        // background-color: red;
-        &:last-child{
-            background-color: #ffffff0e;
-            height: 90%;
-            width: 100%;
-        }
-        .MuiOutlinedInput-notchedOutline {
-            border-color: transparent !important;
-            // background-color: #fff !important ;
-          }
 
+
+.srch-hero{
+    width:100%;
+    height: 100vh;
+    position: relative;
+    background-color: red;
+    form{
+        position: relative;
+        z-index: 3;
+        .srchForm{
+            width: 90%;
+            margin: 0 auto;
+            border-radius: 2em;
+        }
+        .MuiOutlinedInput-root{
+            border-color:transparent;
+        }
     }
+    .gradient{
+        position: absolute;
+        top:0;
+        z-index: 2;
+    }
+    .c-elm{
+        width: 100%;
+        height:100%;
+        // background-color: red;
+        // .reveal-img{
+        //     width: ;
+        // }
+    }
+}
+.g-reverse{
+    background: linear-gradient(to top,transparent,#ffffff05,#ffffff10,#ffffff23,#ffffff38,#ffffff4b,#ffffff75,#ffffffb4,#ffffffd8,#ffffffec,#ffffff) !important;
+}
+.gradient{
+    width:100%;
+    height: 100vh;
+    background: linear-gradient(to bottom,transparent,#ffffff05,#ffffff10,#ffffff23,#ffffff38,#ffffff4b,#ffffff75,#ffffffb4,#ffffffd8,#ffffffec,#ffffff);
 }
 .c-ovly{
     width: 100%;
@@ -30,14 +48,6 @@
     // backdrop-filter: blur(5px);
 }
 
-#article-page{
-    width: 100%;
-    min-height: 100vh;
-    // background-color: red;
-    position: relative;
-    z-index: 3;
-    
-}
 #write-now{
     width: 30vmax;
     height: 80vh;

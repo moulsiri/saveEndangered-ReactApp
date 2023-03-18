@@ -1,12 +1,12 @@
 import React from 'react'
 
-const Logo = () => {
+const Logo = ({color}) => {
   let style={
-
+  color
   }
   return (
-    <div className="logo" style={style}>
-        <h3>SAVE</h3>
+    <div className="logo" >
+        <h3 style={style}>SAVE</h3>
         <h5>the endangered</h5>
     </div>
   )

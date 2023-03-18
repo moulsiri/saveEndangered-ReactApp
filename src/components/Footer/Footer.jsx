@@ -8,9 +8,9 @@ import {ImFacebook2} from 'react-icons/im';
 import {RiInstagramLine} from 'react-icons/ri';
 import {AiOutlineTwitter} from 'react-icons/ai';
 import {FaWhatsapp} from 'react-icons/fa';
-const Footer = () => {
+const Footer = ({fRef}) => {
   return (
-    <footer>
+    <footer ref={fRef}>
       <ForestSvg/>
       <div id="f1">
         <div className="fcenter">

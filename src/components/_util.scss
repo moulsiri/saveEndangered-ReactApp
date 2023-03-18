@@ -17,6 +17,7 @@ $logo:"Azonix";
     --action2:#D9AC72;
     --action1:#B7A540;
     --card:#181818;
+    --darkLogo:#2c2c2c;
 }
 
 @mixin flex($justify:space-between,$align:center,$direction:row) {
@@ -76,12 +77,15 @@ main{
         bottom: 0;
     }
 }
-.content{
-    width: 100%;
-    min-height: 400vh;
-    background-color: #fff;
-    padding-top: 10vmin;
-    position: relative;
 
-    @include flex(flex-start,flex-end,column)
+
+.link-element{
+    text-decoration: none;
 }
+.pointer{
+    cursor: pointer;
+}
+
+
+
+

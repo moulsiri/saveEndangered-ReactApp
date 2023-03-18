@@ -1,45 +1,53 @@
 import { InputAdornment, Paper, TextField } from '@mui/material'
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import React from 'react'
+import IconButton from '@mui/material/IconButton';
+import Fab from '@mui/material/Fab';
 import HeroCarousel from './HeroCarousel';
 
 const ArticleHero = () => {
+
+    const submitionHandler=(e)=>{
+        e.preventDefault()
+
+    }
+
   return (
-    <div id="a-hero">
-        <div className="a-prt">
-            <Paper elevation={9} 
-            sx={{
-                borderRadius:"4em",
-                p:1,
-                position:'absolute',
-                bottom:"-50%",
-                width:"100%",
-                zIndex:3
-                }}>
-                <form>
-                <TextField
-                label="Search various articles by name or auther name"
-                id="search-articles"
-                fullWidth
-                sx={
-                    {
-                        '& .MuiInputLabel-root.Mui-focused':{
-                            color:'#D9AC72',
-                            transform:'translate(14px,-150%) scale(1)'
-                        }
-                    }
-                }
-                InputProps={{
-                endAdornment: <InputAdornment position="start"><SearchRoundedIcon/></InputAdornment>,
-          }}
-        />
-                </form>
-            </Paper>
-        </div>
-        <div className="a-prt">
-            <HeroCarousel></HeroCarousel>
-        </div>
+    <div className="srch-hero">
+      <form onSubmit={submitionHandler}>
+        <Paper
+        className='srchForm'>
+        <TextField 
+        id="srch-articles" 
+        label="Enter any heading and author name to search here" 
+        fullWidth
+        variant="outlined"
+        size="sm"
+        InputProps={
+            {
+                endAdornment:
+            <InputAdornment position="end">
+                <Fab color="primary" aria-label="add" type='submit'>
+                <SearchRoundedIcon />
+
+                </Fab>
+                <IconButton aria-label="delete" disabled color="primary">
+                </IconButton>
+             
+            </InputAdornment>
+          
+            }
+        }
         
+         />
+        </Paper>
+ 
+      </form>
+      <div className="gradient">
+      </div>
+      <div className="c-elm">
+        
+      </div>
     </div>
   )
 }

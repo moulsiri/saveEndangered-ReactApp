@@ -1,0 +1,16 @@
+@import '../util';
+
+#auth{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    z-index: 3;
+    @include flex(flex-end,flex-end);
+    .aRt{
+        width: 60%;
+        height:100%;
+        // backdrop-filter: blur(10px);
+        background-color: #fff;
+    }
+   
+}

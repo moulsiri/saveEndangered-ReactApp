@@ -1,0 +1,13 @@
+@import './util';
+
+
+
+.content{
+    width: 100%;
+    min-height: 400vh;
+    background-color: #fff;
+    padding-top: 10vmin;
+    position: relative;
+
+    @include flex(flex-start,flex-end,column)
+}
