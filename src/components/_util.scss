@@ -18,6 +18,7 @@ $logo:"Azonix";
     --action1:#B7A540;
     --card:#181818;
     --darkLogo:#2c2c2c;
+    --secTxt2:#634723;
 }
 
 @mixin flex($justify:space-between,$align:center,$direction:row) {
@@ -26,6 +27,12 @@ $logo:"Azonix";
     align-items:$align;
     flex-direction: $direction;
 
+}
+@mixin centerAbs(){
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top:50%;
+    left:50%;
 }
 
 @mixin maxMobile($size){

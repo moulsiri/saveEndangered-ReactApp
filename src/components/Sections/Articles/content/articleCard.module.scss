@@ -1,0 +1,36 @@
+@import "../../../util";
+
+.articleCard{
+    // background-color: red;
+    height: 50vh;
+    border-radius: 1em;
+    @include flex(flex-start,center);
+    padding: 0 1em;
+    #leftQuoteA{
+        font-size: 5vmin;
+        background-color:var(--action1);
+        height:inherit;
+        color:#fff;
+        box-shadow: 0 5px 5px #00000021;
+    }
+    img{
+        width: 50%;
+        // color:#5e5c5c;
+    }
+    .articleCardContent{
+        width: 60%;
+        height: inherit;
+        @include flex(space-between,flex,column);
+        padding: 0 1em 1em 1em;
+    position:relative;
+
+    }
+    #rightQuoteA{
+        position: absolute;
+        right:0;
+        font-size: 20vmin;
+        bottom:0;
+        color:#d9ac7252;
+        z-index: 1;
+    }
+}

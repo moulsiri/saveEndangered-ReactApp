@@ -1,0 +1,44 @@
+@import '../../../util';
+
+.c-footer{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    .gradient{
+        width:100%;
+        height: 100vh;
+        position: absolute;
+        top:0;
+        z-index: 2;
+        background: linear-gradient(to top,transparent,#ffffff05,#ffffff10,#ffffff23,#ffffff38,#ffffff4b,#ffffff75,#ffffffb4,#ffffffd8,#ffffffec,#ffffff) !important;
+
+    }
+    .c-imageContainer{
+        position: relative;
+        z-index: 3;
+        padding:0 10vmin;
+        @include flex(flex-start,center,column);
+        .c-imageGallery{
+            position: relative;
+            &:after{
+                content: "";
+                width: 100%;
+                height: 100%;
+                // background-color: yellow;
+                background: linear-gradient(to top,transparent,#ffffff05,#ffffff10,#ffffff23,#ffffff38,#ffffff4b,#ffffff75,#ffffffb4,#ffffffd8);
+                position: absolute;
+                top:0
+            }
+            .c-imgElm{
+                position: relative;
+                z-index: 9;
+                opacity: .5;
+                transition:all cubic-bezier(0.075, 0.82, 0.165, 1) 2s;
+                &:hover{
+                    opacity: 1;
+                }
+
+            }
+        }
+    }
+}

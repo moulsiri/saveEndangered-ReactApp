@@ -1,16 +1,17 @@
 import React from 'react'
 import Blank from '../../utils/Blank'
-import ArticleHero from './ArticleHero'
+import ArticleContent from './content/ArticleContent'
+import ArticleHero from './hero/ArticleHero'
+import ArticleImage from './footer/ArticleImage'
 import './articles.scss'
-import HeroCarousel from './HeroCarousel'
 
 const Articles = () => {
   return (
     <>
-    <ArticleHero></ArticleHero>
-    <section className='content'>
-    </section>
-    <div className="gradient g-reverse"></div>
+    <ArticleHero/>
+    <ArticleContent/>
+    <ArticleImage/>
+   
     </>
     
   )

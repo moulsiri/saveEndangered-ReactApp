@@ -33,11 +33,15 @@ const App = () => {
         contrastText:"#fff"
       },
       secondary:{
-        main:"#D9AC72"
+        main:"#D9AC72",
+        // contrastText:"#fff"
 
       },
       white:{
         main:"#fff"
+      },
+      lightSec:{
+        main:"#d9ac7288"
       }
     },
     components:{
