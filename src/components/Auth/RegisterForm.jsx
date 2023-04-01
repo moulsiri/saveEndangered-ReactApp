@@ -1,37 +1,76 @@
-import {useState} from 'react'
+import {useState,useEffect,forwardRef} from 'react'
 
+//redux states
+import { useSelector,useDispatch } from 'react-redux';
+import {registerNormalUser,loginNormalUser,clearErrorAsync} from '../../features/asyncActions/asyncNormalUser'
+
+//material ui
 import CircularProgress from '@mui/material/CircularProgress';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import { Box, Button, IconButton, InputAdornment, Paper, TextField, Typography } from '@mui/material';
+import {Box, Button, IconButton, InputAdornment, Paper, TextField, Typography } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import GoogleIcon from '@mui/icons-material/Google';
 import LoginIcon from '@mui/icons-material/Login';
-const RegisterForm = ({userLogin,setUserLogin}) => {
-  console.log(userLogin)
-    const [showPassword, setShowPassword] = useState(false);
-    const [loading, setLoading] = useState(false);
- 
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
-    const [formData,setFormData]=useState({
+
+const Alert=forwardRef(function Alert(props,ref){
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props}></MuiAlert>
+})
+
+
+const RegisterForm = ({userLogin,setUserLogin}) => {
+  const {loading,error} =useSelector((store)=>store.normalUser);
+  const dispatch=useDispatch();
+
+
+  const [openAlert,setOpenAlert]=useState(false)
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData,setFormData]=useState({
         name:"",
         email:"",
         password:"",
-        username:""
       })
 
-      //event handlers
-      function handleClick() {
-        setLoading(true);
-      }
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-    const formSubmitionHandler=(e)=>{
-        e.preventDefault();
-        console.log(formData)
-      }
-      const getFieldsData=(e)=>{
-        setFormData({...formData,[e.target.name]:e.target.value})
-      }
+  
+  useEffect(()=>{
+    if(error){
+      setOpenAlert(true)
+      dispatch(clearErrorAsync())
+    }
+  })
+  useEffect(()=>{
+    //empty the fields when tab is changed to login or signup
+    setFormData({
+          name:"",
+          email:"",
+          password:"",
+          username:""
+    })
+  },[userLogin])
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleAlertClose=(event,reason)=>{
+    if(reason==='clickaway'){
+      return;
+    }
+
+    setOpenAlert(false)
+
+  }
+
+  const formSubmitionHandler=(e)=>{
+    e.preventDefault();
+    if(userLogin){
+      dispatch(loginNormalUser(formData));
+    }else{
+      dispatch(registerNormalUser(formData,setOpenAlert))
+    }
+  }
+  const getFieldsData=(e)=>{setFormData({...formData,[e.target.name]:e.target.value})}
+   
   return (
     <Box
     sx={{
@@ -68,17 +107,7 @@ const RegisterForm = ({userLogin,setUserLogin}) => {
  onSubmit={formSubmitionHandler}
  >
   {userLogin
-  ?  <TextField 
-  id="user-username" 
-  sx={{my:2}}
-  label="Enter your username" 
-  variant="outlined"
-  fullWidth
-  value={formData.username}
-  name="username"
-  onChange={getFieldsData}
-  required
-   />:<TextField 
+  ? "":<TextField 
   id="user-name" 
   sx={{my:2}}
   label="Enter your name" 
@@ -89,10 +118,7 @@ const RegisterForm = ({userLogin,setUserLogin}) => {
   onChange={getFieldsData}
   required
    />}
-   {
-    userLogin
-    ?" "
-    :<TextField 
+  <TextField 
     id="user-email" 
     sx={{my:2}}
     type="email"
@@ -104,7 +130,7 @@ const RegisterForm = ({userLogin,setUserLogin}) => {
     name="email"
     onChange={getFieldsData}
   />
-   }
+
 
 
   <TextField
@@ -133,7 +159,7 @@ const RegisterForm = ({userLogin,setUserLogin}) => {
  sx={{my:2,
 width:"100%"}}
  type="submit"
- endIcon={loading?<CircularProgress  color='white' size={20}/>:userLogin?<LoginIcon/>:<PersonAddIcon/>}
+ endIcon={loading?(<CircularProgress  color='white' size={20}/>):(userLogin?<LoginIcon/>:<PersonAddIcon/>)}
  >{userLogin?"Let's Go":"Create you account"}</Button>
 
  <Button 
@@ -145,6 +171,9 @@ width:"100%"}}
  </form>
 
    </Paper>
+    <Snackbar open={openAlert} autoHideDuration={2000} onClose={handleAlertClose}>
+      <Alert onClose={handleAlertClose} severity="error" sx={{width:'100%'}}>{error}</Alert>
+    </Snackbar>
     </Box>
   )
 }

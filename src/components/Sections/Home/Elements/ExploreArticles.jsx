@@ -1,53 +1,32 @@
 import React from 'react'
 import {IoMdArrowDropright, IoMdCheckmarkCircleOutline} from 'react-icons/io'
 import { Link } from 'react-router-dom'
+
+import carouselImg from '../../../../assets/images/a-rhino.jpg';
+import bigStoryImg from '../../../../assets/images/loin&loiness.jpg';
+import author from '../../../../assets/images/writer.jpg';
+import articleImg from '../../../../assets/images/loin&loiness2.jpg'
+import ArticleCarousel from './ArticleCarousel';
+
+
 const ExploreArticles = () => {
   return (
     <section id="exArticles">
       <div className="ex-prt1">
-         <div id="h-article-carousel">
-        <div className="h-a-elm">
-          <div className="h-a-txt">
-            <h2>facts about rhino</h2>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam rerum aperiam necessitatibus recusandae officiis hic debitis, eligendi voluptas vitae eum, facere iste ex. Deserunt iure velit provident! Minima, adipisci ipsa.</p>
-            <button>
-              Read more
-            </button>
-
-          </div>
-          <div className="h-a-img">
-            <div className="a-img">
-              <img src="/assets/images/a-rhino.jpg" alt="" />
-
-            </div>
-
-          </div>
-          <div className="red-bx"></div>
-
-        </div>
-        <div className="h-a-slideBtn">
-              <div className="h-a-btn">
-                <h3>Prev</h3>
-              </div>
-              <div className="h-a-btn">
-                <h3>Next</h3>
-              </div>
-        </div>
-
-      </div>
+         <ArticleCarousel></ArticleCarousel>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et totam perferendis sequi? Soluta eius sunt at vero voluptatibus corporis distinctio sint, consectetur exercitationem veritatis voluptatem nobis itaque, culpa ipsam iste.</p>
       </div>
       <div className="ex-prt2">
          <div id="bg-picture">
         <div id="b-lft">
           <div id="b-img">
-            <img src="/assets/images/loin&loiness.jpg" alt="" />
+            <img src={bigStoryImg} alt="" />
             <div className="a-writer">
               <h3>article written by</h3>
               <div className="w-content">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum eos facere accusantium fugiat harum, minima adipisci possimus nulla quo</p>
                 <div className="a-img">
-                  <img src="/assets/images/writer.jpg" alt="" />
+                  <img src={author} alt="" />
                 </div>
               </div>
               <div className="name">
@@ -59,7 +38,7 @@ const ExploreArticles = () => {
             </div>
             <div className="a-headline">
               <div id="a-hlft">
-                <img src="/assets/images/loin&loiness2.jpg" alt="" />
+                <img src={articleImg} alt="" />
               </div>
               <div id="a-hrt">
               <div className="h-a-txt">

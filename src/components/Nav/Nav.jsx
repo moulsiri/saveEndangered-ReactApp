@@ -1,12 +1,15 @@
 import {useEffect,useRef,useState} from 'react'
+import { useSelector } from 'react-redux';
 import { Link, NavLink,useLocation } from 'react-router-dom';
 import Logo from './Logo';
 import './navbar.scss';
 import {FiSearch} from 'react-icons/fi';
 import {AiOutlineMenu} from 'react-icons/ai'
 import { Button } from '@mui/material';
+import User from './User';
 
 const Nav = ({fTracker}) => {
+  const {isAuthenticated}=useSelector((s)=>s.normalUser)
   let nav=useRef(null)
   const location=useLocation();
   // Get the height of the footer
@@ -43,7 +46,7 @@ const footerHeight = fTracker.current && fTracker.current.offsetHeight;
     // The footer has arrived on scroll
     nav.current.classList.remove("other-scroll-class");
     nav.current.classList.add("onscroll-class");
-    console.log(nav.current.classList)
+    // console.log(nav.current.classList)
 
 
   }
@@ -84,11 +87,13 @@ const footerHeight = fTracker.current && fTracker.current.offsetHeight;
             <FiSearch style={{color:"#D9AC72"}}/>
           </div>
           <FiSearch style={{color:"#D9AC72"}} id="n-srch"/>
-          <Link to="/auth" className='link-element'>
+          {
+            isAuthenticated?<User/>:<Link to="/auth" className='link-element'>
           <Button variant="contained" size="small" className="n-joinBtn">Join Us</Button>
           </Link>
+          }
+          
           <AiOutlineMenu style={{color:"#D9AC72"}} id="n-menu"></AiOutlineMenu>
-
         </div>
 
     </nav>

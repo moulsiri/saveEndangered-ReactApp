@@ -8,6 +8,9 @@ import { useNavigate } from 'react-router-dom';
 import Logo from '../Nav/Logo';
 import { Box, Button, Paper, TextField, Typography } from '@mui/material';
 import RegisterForm from './RegisterForm';
+
+
+import Test from './Test';
 const Auth = () => {
   const navigate=useNavigate()
   const [userLogin,setUserLogin]=useState(true)
@@ -49,9 +52,7 @@ const Auth = () => {
 
         <Button sx={{my:2}} variant="contained" onClick={()=>{setUserLogin(!userLogin)}}>{userLogin?"signup":"login"}</Button>
         <Button sx={{my:2}} variant="outlined">Join as an Organisation</Button>
-      </Box>
-      
-      
+      </Box>   
       <div className={css.aRt}>
         <Box
         width="100%"
@@ -67,6 +68,7 @@ const Auth = () => {
         
       
         </Box>
+        {/* <Test></Test> */}
       </div>
     </section>
     </>

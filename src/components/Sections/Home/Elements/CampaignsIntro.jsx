@@ -1,6 +1,11 @@
 import React from 'react'
 import { IoMdArrowDropright } from 'react-icons/io'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+
+import together from '../../../../assets/images/together.png';
+import elephant from '../../../../assets/images/elephant2.png';
+import people from '../../../../assets/images/peoples.png';
+
 
 const CampaignsIntro = () => {
   return (
@@ -36,12 +41,12 @@ species</p>
     </div>
     <div id="t-rt">
       <div className="c-img">
-        <img src="/assets/images/together.png" alt="" />
+        <img src={together} alt="" />
         <div className="cs-img" id="cs-img1">
-          <img src="/assets/images/elephant2.png" alt="" />
+          <img src={elephant} alt="" />
         </div>
         <div className="cs-img" id="cs-img2">
-        <img src="/assets/images/peoples.png" alt="" />
+        <img src={people} alt="" />
 
         </div>
 

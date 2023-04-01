@@ -2,15 +2,20 @@ import {useEffect} from 'react'
 /**
  * external libraries
  */
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes,Navigate } from 'react-router-dom';
 import { createTheme, ThemeProvider} from '@mui/material/styles';
 import { IconContext } from "react-icons";
 
+import {app,database} from './firebaseConfig';
+import {collection,addDoc} from 'firebase/firestore';
 
-// Import css files for carousel
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import "./components/CommonStyles.scss";
+
+/**
+ * redux
+ */
+import {loadNormalUser} from './features/asyncActions/asyncNormalUser';
+import { useDispatch,useSelector } from 'react-redux';
+
 
 /**
  * Components
@@ -21,10 +26,14 @@ import Campaigns from './components/Sections/Campaigns/Campaigns'
 import Help from './components/Sections/Help/Help'
 import Home from './components/Sections/Home/Home'
 import Auth from './components/Auth/Auth';
-import RoutesWrapper from './RoutesWrapper';
+import WriteArticle from './components/Sections/Articles/WriteArticle/WriteArticle';
+import MainHomePage from './components/Sections/MainHomePage';
+import ProtectiveRoute from './components/utils/ProtectiveRoute';
 
 const App = () => {
- 
+ const dispatch=useDispatch();
+ const {isAuthenticated}=useSelector((s)=>s.normalUser)
+
 
   const MUItheme=createTheme({
     palette:{
@@ -57,7 +66,8 @@ const App = () => {
   })
 
   useEffect(()=>{
-
+     dispatch(loadNormalUser())
+    //  console.log('helo')
   },[])
 
 
@@ -66,17 +76,21 @@ const App = () => {
     <ThemeProvider theme={MUItheme}>
     <IconContext.Provider value={{ className: "icons-class" }}>
       <main>
-
-    <RoutesWrapper>
      <Routes>
-      <Route index path="/" element={<Home/>}></Route>
-      <Route path="/articles" element={<Articles/>}></Route>
-      <Route path="/campaigns" element={<Campaigns/>}></Route>
-      <Route path="/about" element={<About/>}></Route>
-      <Route path="/help" element={<Help/>}></Route>
-      <Route path="/auth" element={<Auth/>}></Route>
+      <Route path="/" element={<MainHomePage/>}>
+      <Route index path="/" element={<Home/>}/>
+      <Route path="articles" element={<Articles/>}/>
+      <Route path="campaigns" element={<Campaigns/>}/>
+      <Route path="about" element={<About/>}/>
+      <Route path="help" element={<Help/>}/>
+      </Route>
+      
+       <Route path="/auth" element={<ProtectiveRoute><Auth/></ProtectiveRoute>}/>
+      
+      <Route path="/article/write" element={<WriteArticle/>}/>
     </Routes>
-    </RoutesWrapper>
+   
+
 
    </main>
    </IconContext.Provider>

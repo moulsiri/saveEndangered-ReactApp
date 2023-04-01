@@ -1,5 +1,10 @@
 import React from 'react';
-// import img from '../../../assets/images/mouse.jpg'
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
+
+import bgImg from '../../../../assets/images/webp/bg.webp';
+import stamp from '../../../../assets/png/stamp.png';
+import mouse from '../../../../assets/images/webp/mouse.webp'
+
 
 const HeroBackground = () => {
   return (
@@ -15,15 +20,14 @@ const HeroBackground = () => {
             <img src="/assets/images/adam-bird.jpg" alt="" />
           </div> */}
           <div className="bImg">
-          <img src="/assets/images/bg.png" alt="" />
-
+          <img src={bgImg} alt="" />
           </div>
           
           
          </div>
          <div id="mouse">
-          <img src="/assets/images/mouse.jpg" alt="" />
-          <div id="stamp"><img src="/assets/png/stamp.png" alt="" /></div>
+          <img src={mouse} alt="" />
+          <div id="stamp"><img src={stamp} alt="" /></div>
          </div>
     </div>
   )

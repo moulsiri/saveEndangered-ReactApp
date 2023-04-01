@@ -9,7 +9,7 @@ import './style.scss'
 const ArticleContent = () => {
 
   return (
-    <section className='content'>
+    <section className='content' >
         <LeftSection/>
         <RightSection/>    
     </section>

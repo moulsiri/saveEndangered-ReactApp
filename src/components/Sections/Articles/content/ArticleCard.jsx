@@ -85,10 +85,11 @@ const ArticleCard = () => {
       </Button>
       </Box>
       </Box>
-      <RiDoubleQuotesR id={css.rightQuoteA}/>
       
 
       </Box>
+      <RiDoubleQuotesR id={css.rightQuoteA}/>
+
 
     </Paper>
     </ThemeProvider>

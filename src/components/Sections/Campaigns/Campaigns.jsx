@@ -1,14 +1,16 @@
 import React from 'react'
 import Blank from '../../utils/Blank'
+import CampaignsHero from './CampaignsHero'
+import CampaignFooter from './CampaignFooter'
 
 const Campaigns = () => {
   return (
     <>
-    <Blank></Blank>
+    <CampaignsHero></CampaignsHero>
     <section className='content'>
 
     </section>
-    <Blank position={'o-p-bottom'}></Blank>
+    <CampaignFooter></CampaignFooter>
 
     </>
   )

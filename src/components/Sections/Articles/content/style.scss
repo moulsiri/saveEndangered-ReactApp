@@ -10,14 +10,16 @@
     width: 30%;
     height: 70vh;
     position: sticky;
-    top:25vmin;
+    top:20vmin;
     border-left: 1px solid #00000017;
     padding: 1em 2em;
 }
 .top-org-card{
-    padding: 1em;
-    display: flex;
-    img{
-        width: 50%;
-    }
+    padding: .5em;
+    @include flex(space-between,center);
+    // background-color: red;
+    margin-top: 1em;
+    // img{
+    //     width: 50%;
+    // }
 }

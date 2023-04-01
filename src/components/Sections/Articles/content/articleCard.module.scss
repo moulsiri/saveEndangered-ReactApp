@@ -6,6 +6,8 @@
     border-radius: 1em;
     @include flex(flex-start,center);
     padding: 0 1em;
+    position:relative;
+
     #leftQuoteA{
         font-size: 5vmin;
         background-color:var(--action1);
@@ -22,7 +24,8 @@
         height: inherit;
         @include flex(space-between,flex,column);
         padding: 0 1em 1em 1em;
-    position:relative;
+        position: relative;
+        z-index: 2;
 
     }
     #rightQuoteA{

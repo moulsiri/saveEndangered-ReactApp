@@ -81,6 +81,10 @@
                 //     font-size: 2vmax;
                 //   }
             }
+            h4{
+                color:var(--action2);
+                font-weight: 400;
+            }
             .action-btn{
                 margin-top: 1em;
                 width: 100%;
@@ -130,7 +134,6 @@
             img{
                 height: 100%;
                 object-fit: cover;
-
             }
         }
         // .bImg{
