@@ -29,6 +29,8 @@ import Auth from './components/Auth/Auth';
 import WriteArticle from './components/Sections/Articles/WriteArticle/WriteArticle';
 import MainHomePage from './components/Sections/MainHomePage';
 import ProtectiveRoute from './components/utils/ProtectiveRoute';
+import OrganisationAuth from './components/Auth/OrganisationAuth';
+import Article from './components/Sections/Articles/Article/Article';
 
 const App = () => {
  const dispatch=useDispatch();
@@ -79,15 +81,18 @@ const App = () => {
      <Routes>
       <Route path="/" element={<MainHomePage/>}>
       <Route index path="/" element={<Home/>}/>
-      <Route path="articles" element={<Articles/>}/>
+      <Route path="/articles" element={<Articles/>}>
+        
+      </Route>
       <Route path="campaigns" element={<Campaigns/>}/>
       <Route path="about" element={<About/>}/>
       <Route path="help" element={<Help/>}/>
+      <Route path="/articles/:id" element={<Article/>}/>
       </Route>
       
-       <Route path="/auth" element={<ProtectiveRoute><Auth/></ProtectiveRoute>}/>
-      
+      <Route path="/auth" element={<ProtectiveRoute><Auth/></ProtectiveRoute>}/>
       <Route path="/article/write" element={<WriteArticle/>}/>
+      <Route path="/organisation/auth" element={<OrganisationAuth/>}></Route>
     </Routes>
    
 

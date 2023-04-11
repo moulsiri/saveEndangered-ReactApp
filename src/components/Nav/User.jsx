@@ -16,6 +16,8 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import Box from '@mui/material/Box';
 
+import Badge from '@mui/material/Badge';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 
 function stringToColor(string) {
     let hash = 0;
@@ -61,6 +63,9 @@ const User = () => {
   return (
     <>
      {/* <Tooltip title="Account settings"> */}
+     {/* <Badge badgeContent={4} color="primary">
+      <NotificationsNoneIcon color="action" />
+    </Badge> */}
     <IconButton
       onClick={handleClick}
       size="small"
@@ -69,8 +74,9 @@ const User = () => {
       aria-haspopup="true"
       aria-expanded={open ? 'true' : undefined}
     >
-     <Avatar {...stringAvatar(user.name)} />
+     <Avatar {...stringAvatar("Moulsiri Awasthi")} />
     </IconButton>
+   
   {/* </Tooltip> */}
   <Menu
         anchorEl={anchorEl}

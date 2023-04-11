@@ -1,18 +1,16 @@
 import {useState} from 'react';
 import MainBackground from '../utils/MainBackground';
 import css from './Auth.module.scss';
-import IconButton from '@mui/material/IconButton';
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Logo from '../Nav/Logo';
 import { Box, Button, Paper, TextField, Typography } from '@mui/material';
 import RegisterForm from './RegisterForm';
 
 
 import Test from './Test';
+import BackButton from '../utils/BackButton';
 const Auth = () => {
-  const navigate=useNavigate()
   const [userLogin,setUserLogin]=useState(true)
 
 
@@ -21,16 +19,13 @@ const Auth = () => {
     <>
     <MainBackground></MainBackground>
 
-     <section id={css.auth}>
-      <IconButton sx={{
+     <section className={css.auth}>
+      <BackButton style={{
         position:'absolute',
         left:"5vmin",
         top:"10vmin",
-      }}
-      onClick={()=>{navigate(-1)}}
-      color="white">
-        <KeyboardBackspaceIcon/>
-      </IconButton>
+      }}></BackButton>
+     
       <Box
       sx={{
         display:'flex',
@@ -51,7 +46,9 @@ const Auth = () => {
       </Typography>
 
         <Button sx={{my:2}} variant="contained" onClick={()=>{setUserLogin(!userLogin)}}>{userLogin?"signup":"login"}</Button>
-        <Button sx={{my:2}} variant="outlined">Join as an Organisation</Button>
+        <Link to="/organisation/auth" className='link-element' style={{width:'100%'}}>
+        <Button sx={{my:2,width:'100%'}} variant="outlined">Join as an Organisation</Button>
+        </Link>
       </Box>   
       <div className={css.aRt}>
         <Box
@@ -65,8 +62,6 @@ const Auth = () => {
         >
         <Logo color={"#2c2c2c"}></Logo>
         <RegisterForm userLogin={userLogin} setUserLogin={setUserLogin}></RegisterForm>
-        
-      
         </Box>
         {/* <Test></Test> */}
       </div>

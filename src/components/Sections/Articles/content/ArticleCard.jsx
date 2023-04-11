@@ -8,6 +8,7 @@ import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import Fab from '@mui/material/Fab';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import css from './articleCard.module.scss';
+import { Link } from 'react-router-dom';
 
 const articleTheme=createTheme({
   palette:{
@@ -79,7 +80,9 @@ const ArticleCard = () => {
       </Box>
       </Box>
       <Box>
+        <Link to={`/articles/${"lskd"}`} className='link-element'>
       <Button variant="contained">Read Now</Button>
+      </Link>
       <Button variant='text'>
       <BookmarkBorderIcon size="small" />
       </Button>

@@ -1,6 +1,6 @@
 @import '../util';
 
-#auth{
+.auth{
     width: 100%;
     height: 100vh;
     position: relative;
@@ -13,4 +13,16 @@
         background-color: #fff;
     }
    
+}
+
+.orgFormBox{
+    width: 60%;
+    height:70vh;
+    // background-color: red;
+    overflow-y: auto;
+    padding:2em 0;
+}
+
+.orgFields{
+    margin-bottom: 1em;
 }

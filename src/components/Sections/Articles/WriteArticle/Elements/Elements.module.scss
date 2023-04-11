@@ -1,0 +1,23 @@
+@import '../../../../util';
+
+.headingElm{
+    // background-color: yellow;
+    font-family: $article;
+    font-size: 2em;
+    font-weight: 400;
+    position: relative;
+    margin-bottom: 1em;
+}
+.paraElm{
+    font-family: $article;
+    font-size: 1.3em;
+    // letter-spacing: .1em;
+    margin-bottom: 1em;
+}
+
+.defaultValue{
+    position: absolute;
+    color:#2c2c2c4d;
+    pointer-events: none;
+
+}

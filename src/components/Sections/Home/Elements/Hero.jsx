@@ -22,14 +22,15 @@ const Hero = () => {
         <Link to="/auth" className='link-element'>
         <Button variant="contained" size="small">Join Us</Button>
         </Link>
+        <Link to="/organisation/auth" className='link-element'>
         <Button variant="outlined" size="small" sx={{marginLeft:'5em'}}>Add origanisation <AiOutlinePlus></AiOutlinePlus></Button>
+        </Link>
 
 
         </div>
         }
         
-        </div>
-     
+        </div>    
       </div>
       <div id="hRt"></div>
     </section>
