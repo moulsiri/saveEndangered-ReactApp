@@ -4,8 +4,11 @@ import ArticleCard from './ArticleCard'
 import Stack from '@mui/material/Stack';
 import { Box, Typography } from '@mui/material'
 
+import {useSelector} from 'react-redux';
 
 const LeftSection = () => {
+  const {articleList}=useSelector((s)=>s.publicData);
+
   return (
     <Box id="a-section-lft">
           <Typography 
@@ -28,7 +31,7 @@ const LeftSection = () => {
           <Box sx={{width:'100%',paddingRight:5,marginTop:5}}>
            <Stack spacing={4}>
             {
-              [1,2,3,4,5,6,7].map((elm,i)=><ArticleCard key={i}/>)
+              articleList.map((elm,i)=><ArticleCard key={elm._id} data={elm} index={i}/>)
             }
             </Stack>
           </Box>

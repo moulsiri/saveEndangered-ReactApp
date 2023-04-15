@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { useSelector,useDispatch } from 'react-redux';
-import { logOutNormalUserAsync } from '../../features/asyncActions/asyncNormalUser';
+import { logOutAsync } from '../../features/asyncActions/asyncNormalUser';
+import { useNavigate } from 'react-router-dom';
 
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
@@ -49,9 +50,9 @@ function stringToColor(string) {
   }
 
 const User = () => {
-    const {user}=useSelector((state)=>state.normalUser);
-    const dispatch=useDispatch()
-
+    const {user,flag}=useSelector((state)=>state.normalUser);
+    const dispatch=useDispatch();
+    const navigate=useNavigate();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -60,6 +61,11 @@ const User = () => {
     const handleClose = () => {
       setAnchorEl(null);
     };
+
+    const logOut=()=>{
+      dispatch(logOutAsync(flag));
+      navigate('/');
+    }
   return (
     <>
      {/* <Tooltip title="Account settings"> */}
@@ -74,11 +80,11 @@ const User = () => {
       aria-haspopup="true"
       aria-expanded={open ? 'true' : undefined}
     >
-     <Avatar {...stringAvatar("Moulsiri Awasthi")} />
+     <Avatar {...stringAvatar(user.name)} />
     </IconButton>
    
   {/* </Tooltip> */}
-  <Menu
+      <Menu
         anchorEl={anchorEl}
         sx={{
     zIndex:'9999'}}
@@ -134,7 +140,7 @@ const User = () => {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={()=>{dispatch(logOutNormalUserAsync())}}>
+        <MenuItem onClick={logOut}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

@@ -13,7 +13,7 @@ import {collection,addDoc} from 'firebase/firestore';
 /**
  * redux
  */
-import {loadNormalUser} from './features/asyncActions/asyncNormalUser';
+import { asyncLoadUser, logOutAsync} from './features/asyncActions/asyncNormalUser';
 import { useDispatch,useSelector } from 'react-redux';
 
 
@@ -23,18 +23,19 @@ import { useDispatch,useSelector } from 'react-redux';
 import About from './components/Sections/About/About'
 import Articles from './components/Sections/Articles/Articles'
 import Campaigns from './components/Sections/Campaigns/Campaigns'
-import Help from './components/Sections/Help/Help'
+// import Help from './components/Sections/Help/Help'
 import Home from './components/Sections/Home/Home'
-import Auth from './components/Auth/Auth';
+import Auth from './components/Auth/User/Auth';
 import WriteArticle from './components/Sections/Articles/WriteArticle/WriteArticle';
 import MainHomePage from './components/Sections/MainHomePage';
 import ProtectiveRoute from './components/utils/ProtectiveRoute';
-import OrganisationAuth from './components/Auth/OrganisationAuth';
+import OrganisationAuth from './components/Auth/Org/OrganisationAuth';
 import Article from './components/Sections/Articles/Article/Article';
+import { fetchArticleList, fetchOrdList } from './features/asyncActions/asyncPublicData';
 
 const App = () => {
  const dispatch=useDispatch();
- const {isAuthenticated}=useSelector((s)=>s.normalUser)
+ const {isAuthenticated,flag}=useSelector((s)=>s.normalUser)
 
 
   const MUItheme=createTheme({
@@ -68,9 +69,12 @@ const App = () => {
   })
 
   useEffect(()=>{
-     dispatch(loadNormalUser())
+    dispatch( asyncLoadUser())
+     dispatch(fetchOrdList());
+     dispatch(fetchArticleList());
+    //  dispatch(logOutAsync())
     //  console.log('helo')
-  },[])
+  },[isAuthenticated])
 
 
 
@@ -86,13 +90,13 @@ const App = () => {
       </Route>
       <Route path="campaigns" element={<Campaigns/>}/>
       <Route path="about" element={<About/>}/>
-      <Route path="help" element={<Help/>}/>
-      <Route path="/articles/:id" element={<Article/>}/>
+      {/* <Route path="help" element={<Help/>}/> */}
+      <Route path="/articles/:id/:i" element={<Article/>}/>
       </Route>
       
-      <Route path="/auth" element={<ProtectiveRoute><Auth/></ProtectiveRoute>}/>
-      <Route path="/article/write" element={<WriteArticle/>}/>
-      <Route path="/organisation/auth" element={<OrganisationAuth/>}></Route>
+      <Route path="/auth" element={<ProtectiveRoute flag={isAuthenticated}><Auth/></ProtectiveRoute>}/>
+      <Route path="/article/write" element={<ProtectiveRoute flag={!isAuthenticated}><WriteArticle/></ProtectiveRoute>}/>
+      <Route path="/organisation/auth" element={<ProtectiveRoute flag={isAuthenticated}><OrganisationAuth/></ProtectiveRoute> }></Route>
     </Routes>
    
 

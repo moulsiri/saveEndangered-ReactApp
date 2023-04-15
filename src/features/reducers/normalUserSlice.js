@@ -5,6 +5,7 @@ const initialState={
     user:{},
     isAuthenticated:false,
     error:null,
+    flag:"",
 }
 
 export const normalUserSlice=createSlice({
@@ -12,35 +13,43 @@ export const normalUserSlice=createSlice({
     initialState,
     reducers:{
         //actions to register normal user
-        loginNormalUserRequest:(state,action)=>{
+        loginRequest:(state,action)=>{
             state.loading=true;
         },
-        loginNormalUserSuccess:(state,action)=>{
+        loginSuccess:(state,action)=>{
             state.loading=false;
             state.isAuthenticated=true;
-            state.user=action.payload;
+            state.user=action.payload.data;
             state.error=null;
+            state.flag=action.payload.flag;
         },
-        loginNormalUserFail:(state,action)=>{
+        loginFail:(state,action)=>{
             state.loading=false;
             state.isAuthenticated=false;
             state.user={};
             state.error=action.payload;
         },
-
-        loadNormalUserRequest:(state,action)=>{
-            state.user=action.payload;
+        loadUserRequest:(state,action)=>{
+            state.loading=true;
+        },
+        loadUser:(state,action)=>{
+            state.loading=false;
+            state.user=action.payload.data;
             state.isAuthenticated=true;
+            state.flag=action.payload.flag
 
         },
         needToSignIn:(state,action)=>{
+            state.loading=false;
             state.user={};
             state.isAuthenticated=false;
 
         },
-        logOutNormalUser:(state,action)=>{
+        logOut:(state,action)=>{
             state.user={};
             state.isAuthenticated=false;
+            state.flag="";
+            console.log(action.payload)
 
         },
         clearError:(state,action)=>{
@@ -52,14 +61,15 @@ export const normalUserSlice=createSlice({
 })
 
 export const {
-    loginNormalUserRequest,
-    loginNormalUserSuccess,
-    loginNormalUserFail,
-
-    loadNormalUserRequest,
+    loginRequest,
+    loginSuccess,
+    loginFail,
+    
+    loadUserRequest,
+    loadUser,
     needToSignIn,
 
-    logOutNormalUser,
+    logOut,
     clearError
 
 

@@ -1,6 +1,8 @@
 import {useState} from 'react';
 import css from './writeArticle.module.scss'
 
+//redux toolkit
+import { useSelector ,useDispatch} from 'react-redux';
 
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
@@ -10,6 +12,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
+import CircularProgress from '@mui/material/CircularProgress';
+import { createArticleAsync } from '../../../../features/asyncActions/asyncArticles';
 
 const style = {
   position: 'absolute',
@@ -20,17 +24,23 @@ const style = {
   bgcolor: 'background.paper',
   boxShadow: 24,
   p: 4,
+  overflowHidden:'auto'
 };
 
 const ArticleForm = ({open,setOpen,content}) => {
-
+   const {orgList}=useSelector((s)=>s.publicData);
+   const {loading,error,success}=useSelector((s)=>s.articleData);
+   const dispatch=useDispatch();
+   
+    
+    const Heading=content && content[0].children[0]
     const [previewImg,setPreviewImg]=useState(null)
     const [formData,setFormData]=useState({
       content,
-      heading:content[0].children[0].text,
+      heading:(content && Heading.type)==="heading"?Heading.text:"",
       previewImg:"",
-      subHeading:'',
-      organisationToVarify:""
+      intro:'',
+      varifiedTo:""
     })
     const handleClose = () => setOpen(false);
 
@@ -47,7 +57,7 @@ const ArticleForm = ({open,setOpen,content}) => {
     }
     const articleSubmitionHandler=(e)=>{
       e.preventDefault();
-      console.log(formData)
+      dispatch(createArticleAsync(formData))
 
     }
     const dataChangeHandler=(e)=>{
@@ -86,15 +96,18 @@ const ArticleForm = ({open,setOpen,content}) => {
 
         <TextField
         sx={{my:'1em'}}
-        id="articleSubHeading" 
-        label="Article Sub Heading" 
+        id="articleIntro" 
+        label="Intro of Article" 
+        helperText="tell user the brief intro about the article"
         variant="outlined"
-        name="subHeading"
-        value={formData.subHeading}
+        name="intro"
+        value={formData.intro}
         fullWidth
+        multiline
         onChange={dataChangeHandler}
         required
-
+        minRows={2}
+        maxRows={2}
         />
 
         <FormControl fullWidth
@@ -103,18 +116,25 @@ const ArticleForm = ({open,setOpen,content}) => {
   <Select
     labelId="select-organisation"
     id="select-organisation"
-    value={formData.organisationToVarify}
-    name="organisationToVarify"
+    value={formData.varifiedTo}
+    name="varifiedTo"
     label="Select an organisation"
     onChange={dataChangeHandler}
     required
   >
-    <MenuItem value='alkdjfie'>Hello World</MenuItem>
-    <MenuItem value='lsjdkfie'>Kaise ho</MenuItem>
-    <MenuItem value='lksfie'>HEEE</MenuItem>
+    { (orgList.length!==0)?
+      orgList.map((elm,i)=><MenuItem key={`lsdkfi${i}`} value={elm._id}>{elm.name}</MenuItem>)
+      
+      :<MenuItem value='null'>Select an organisation</MenuItem>
+    }
     </Select>
         </FormControl>
-        <Button variant="contained" type="submit">Submit</Button>
+        <Button 
+        variant="contained" 
+        type="submit"
+        endIcon={loading?<CircularProgress color="white" size={20}></CircularProgress>:<></>}
+
+        >Submit</Button>
       </form>
        
 

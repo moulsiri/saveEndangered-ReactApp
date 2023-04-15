@@ -1,4 +1,4 @@
-import React from 'react'
+import {useState} from 'react'
 import { IoMdArrowDropright } from 'react-icons/io'
 import { Link } from 'react-router-dom';
 
@@ -8,6 +8,12 @@ import people from '../../../../assets/images/peoples.png';
 
 
 const CampaignsIntro = () => {
+
+  const [imgLoad1,setImgLoad1]=useState(false)
+  const [imgLoad2,setImgLoad2]=useState(false)
+  const [imgLoad3,setImgLoad3]=useState(false)
+
+
   return (
    <section id="campaignsIntro">
     <div className="c-heading">
@@ -41,12 +47,25 @@ species</p>
     </div>
     <div id="t-rt">
       <div className="c-img">
-        <img src={together} alt="" />
+        <img 
+         className={`smooth-image image-${
+          imgLoad1 ? 'visible' :  'hidden'}`}
+          onLoad={()=>setImgLoad1(true)}
+        
+        src={together} alt="" />
         <div className="cs-img" id="cs-img1">
-          <img src={elephant} alt="" />
+          <img
+           className={`smooth-image image-${
+            imgLoad2 ? 'visible' :  'hidden'}`}
+            onLoad={()=>setImgLoad2(true)}
+           src={elephant} alt="" />
         </div>
         <div className="cs-img" id="cs-img2">
-        <img src={people} alt="" />
+        <img
+         className={`smooth-image image-${
+          imgLoad3 ? 'visible' :  'hidden'}`}
+          onLoad={()=>setImgLoad3(true)}
+         src={people} alt="" />
 
         </div>
 

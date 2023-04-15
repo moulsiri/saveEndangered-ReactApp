@@ -77,7 +77,7 @@ const footerHeight = fTracker.current && fTracker.current.offsetHeight;
             <NavLink className={({isActive})=>isActive?"n-link nav-activeLink":"n-link"} to="/">Home</NavLink>
             <NavLink className={({isActive})=>isActive?"n-link nav-activeLink":"n-link"} to="/articles">Articles</NavLink>
             <NavLink className={({isActive})=>isActive?"n-link nav-activeLink":"n-link"} to="/campaigns">Campaigns</NavLink>
-            <NavLink className={({isActive})=>isActive?"n-link nav-activeLink":"n-link"} to="/help">Help us</NavLink>
+            {/* <NavLink className={({isActive})=>isActive?"n-link nav-activeLink":"n-link"} to="/help">Help us</NavLink> */}
             <NavLink className={({isActive})=>isActive?"n-link nav-activeLink":"n-link"} to="/about">About us</NavLink>
         </div>
         </div>

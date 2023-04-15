@@ -1,4 +1,8 @@
 import React from 'react'
+import moment from 'moment';
+
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import { createTheme,ThemeProvider } from '@mui/material/styles';
 import { Alert, Box, Button, Paper, Rating, Typography } from '@mui/material';
@@ -24,11 +28,18 @@ const articleTheme=createTheme({
 
 
 
-const ArticleCard = () => {
+const ArticleCard = ({data,index}) => {
   return (
     <ThemeProvider theme={articleTheme}>
       <Paper className={css.articleCard} elevation={3}>
-      <img src="https://images.unsplash.com/photo-1521651201144-634f700b36ef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="" />
+        <Box
+        sx={{width:'50%'}}>
+          <LazyLoadImage
+          src={data?.previewImg.url}
+          effect='blur'
+          />
+        </Box>
+      
       <Box className={css.articleCardContent}>
         <Box
         sx={{
@@ -39,15 +50,26 @@ const ArticleCard = () => {
         }}>
           <RiDoubleQuotesL id={css.leftQuoteA}/>
           <Typography variant="blockquotes" display="block" gutterBottom>
-            May 25,2022
+            {moment(data?.createdAt).fromNow()}
          </Typography>
 
         </Box>
       <Typography variant="h4" component={'h1'} gutterBottom>
-        The wildlife and its habitat cannot speak, so we must and we will.
+        {data?.heading}
       </Typography>
-      <Typography variant="body1" component={'p'} gutterBottom>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis reiciendis et porro eligendi, illo quas dolores eum? Animi fuga ducimus dicta non et. Laboriosam et obcaecati fugiat quibusdam beatae voluptatem!
+      <Typography 
+      sx={{
+        // backgroundColor:'red',
+        // height:'10vh',
+        // width:'89%',
+        // wordWrap: "break-word"
+    }}
+      variant="body1" 
+      component={'p'} 
+      gutterBottom >
+       {
+        data?.intro
+       }
       </Typography>
       <Box
       sx={{
@@ -63,24 +85,30 @@ const ArticleCard = () => {
         width:"45%"
       }}>
       <Avatar alt="Remy Sharp">
-        M
+        {
+          data?.writtenBy?.name[0]|| 'M'
+        }
       </Avatar>
       <Box>
       <Typography variant="subtitle1" component={'h6'}>
-        Moulsiri Awasthi
+        {
+          data?.writtenBy?.name
+        }
       </Typography>
       <Typography 
       variant="caption" 
       component={'p'}
       sx={{display:'flex',
       alignItems:'center'}}>
-        Name of Organisation < TaskAltIcon sx={{fontSize:13,marginLeft:1}}/>
+        {
+          data?.varifiedTo?.name
+        } < TaskAltIcon sx={{fontSize:13,marginLeft:1}}/>
       </Typography>
 
       </Box>
       </Box>
       <Box>
-        <Link to={`/articles/${"lskd"}`} className='link-element'>
+        <Link to={`/articles/${data._id}/${index}`} className='link-element'>
       <Button variant="contained">Read Now</Button>
       </Link>
       <Button variant='text'>

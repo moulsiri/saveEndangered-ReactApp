@@ -7,14 +7,13 @@ import { useSelector } from 'react-redux';
 
 const Hero = () => {
   const {isAuthenticated}=useSelector((s)=>s.normalUser);
-  console.log(isAuthenticated)
   return (
     <section id="hero">
       <div id="hLft">
         <div id="hTxt">
              <h2>extinction is</h2>
         <h1>FOREVER</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio dicta veniam, voluptas distinctio provident in odit saepe rerum facere excepturi est soluta quis porro beatae. Ex commodi illum ut reiciendis.</p>
+        <p>The disappearance of a species is not just a biological event. It is an impoverishment of the world's diversity, a diminution of its complexity, and a tragedy for those who understand and care about nature's richness and intricacy</p>
         {
           isAuthenticated
           ?<h4>Scroll down and explore more</h4>

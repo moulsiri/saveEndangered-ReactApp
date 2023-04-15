@@ -1,0 +1,25 @@
+@import '../../../util';
+
+.card{
+    padding: 1em;
+    position: relative;
+    .cImg{
+        width: 100%;
+        height: 30vh;
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    .cTxt{
+        padding-top: 1em;
+    }
+    .cIcon{
+        position: absolute;
+        right:10%;
+        bottom:5%;
+        opacity: .4;
+    }
+
+}

@@ -2,7 +2,9 @@ import {useState,useEffect,forwardRef} from 'react'
 
 //redux states
 import { useSelector,useDispatch } from 'react-redux';
-import {registerNormalUser,loginNormalUser,clearErrorAsync} from '../../features/asyncActions/asyncNormalUser'
+import {asyncRegisterUser,asyncLogin,clearErrorAsync} from '../../../features/asyncActions/asyncNormalUser'
+
+import Alert from '../../utils/Alert';
 
 //material ui
 import CircularProgress from '@mui/material/CircularProgress';
@@ -12,20 +14,14 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import GoogleIcon from '@mui/icons-material/Google';
 import LoginIcon from '@mui/icons-material/Login';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
 
 
-const Alert=forwardRef(function Alert(props,ref){
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props}></MuiAlert>
-})
+
 
 
 const RegisterForm = ({userLogin,setUserLogin}) => {
   const {loading,error} =useSelector((store)=>store.normalUser);
   const dispatch=useDispatch();
-
-
   const [openAlert,setOpenAlert]=useState(false)
   const [showPassword, setShowPassword] = useState(false);
   const [formData,setFormData]=useState({
@@ -40,7 +36,7 @@ const RegisterForm = ({userLogin,setUserLogin}) => {
       setOpenAlert(true)
       dispatch(clearErrorAsync())
     }
-  })
+  },[error])
   useEffect(()=>{
     //empty the fields when tab is changed to login or signup
     setFormData({
@@ -52,27 +48,21 @@ const RegisterForm = ({userLogin,setUserLogin}) => {
   },[userLogin])
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleAlertClose=(event,reason)=>{
-    if(reason==='clickaway'){
-      return;
-    }
-
-    setOpenAlert(false)
-
-  }
+ 
 
   const formSubmitionHandler=(e)=>{
     e.preventDefault();
     if(userLogin){
-      dispatch(loginNormalUser(formData));
+      dispatch(asyncLogin(formData,"user"));
     }else{
-      dispatch(registerNormalUser(formData,setOpenAlert))
+      dispatch(asyncRegisterUser(formData,"user"))
     }
   }
   const getFieldsData=(e)=>{setFormData({...formData,[e.target.name]:e.target.value})}
    
   return (
-    <Box
+    <>
+     <Box
     sx={{
         my:1
     }}>
@@ -171,10 +161,14 @@ width:"100%"}}
  </form>
 
    </Paper>
-    <Snackbar open={openAlert} autoHideDuration={2000} onClose={handleAlertClose}>
-      <Alert onClose={handleAlertClose} severity="error" sx={{width:'100%'}}>{error}</Alert>
-    </Snackbar>
     </Box>
+    <Alert 
+    openAlert={openAlert} 
+    setOpenAlert={setOpenAlert}
+    mssg={error}
+    severity="error" />
+    </>
+   
   )
 }
 

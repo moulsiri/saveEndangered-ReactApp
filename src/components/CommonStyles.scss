@@ -31,8 +31,20 @@
     opacity: 1;
   }
 
-// .material-alert{
-//     position: absolute;
-//     top:10vmin;
-//     left:0;
-// }
+
+.img-placeholder{
+    width: 100%;
+    height: 100%;
+    background-color: red;
+}
+
+
+.smooth-image {
+    transition: opacity 3s;
+  }
+  .image-visible {
+    opacity: 1;
+  }
+  .image-hidden {
+    opacity: 0;
+  }

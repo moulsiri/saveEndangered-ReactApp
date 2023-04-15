@@ -1,11 +1,13 @@
 import {useState,useEffect}from 'react'
-import css from './Auth.module.scss';
+import { Link } from 'react-router-dom';
+
+import css from '../Auth.module.scss';
 
 import { Box, Button, Typography } from '@mui/material';
-import MainBackground from '../utils/MainBackground'
-import BackButton from '../utils/BackButton'
-import { Link } from 'react-router-dom';
-import Logo from '../Nav/Logo';
+
+import MainBackground from '../../utils/MainBackground'
+import BackButton from '../../utils/BackButton'
+import Logo from '../../Nav/Logo';
 import OrganisationRegForm from './OrganisationRegForm';
 
 const OrganisationAuth = () => {
@@ -26,6 +28,7 @@ const OrganisationAuth = () => {
         display:'flex',
         flexDirection:'column',
         width:'50%',
+        
         p:5,
 
       }}>
@@ -50,7 +53,7 @@ const OrganisationAuth = () => {
         <div className={css.aRt}>
           <Box sx={{p:5}}>
           <Logo color={"#2c2c2c"}></Logo>
-          <OrganisationRegForm></OrganisationRegForm>
+          <OrganisationRegForm RegisterOrg={RegisterOrg}></OrganisationRegForm>
 
           </Box>
 

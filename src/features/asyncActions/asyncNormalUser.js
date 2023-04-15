@@ -1,11 +1,13 @@
 import {
-    loginNormalUserRequest,
-    loginNormalUserSuccess,
-    loginNormalUserFail,
-
-    loadNormalUserRequest,
+    loginRequest,
+    loginSuccess,
+    loginFail,
+    
+    loadUserRequest,
+    loadUser,
     needToSignIn,
-    logOutNormalUser,
+
+    logOut,
     clearError
 } from '../reducers/normalUserSlice';
 
@@ -16,56 +18,128 @@ import * as fire from '../../firebase/userAuth';
 import { getAuth,onAuthStateChanged ,signOut} from 'firebase/auth';
 
 
-export const registerNormalUser=(data,setOpenAlert)=>async (dispatch,getState)=>{
-    dispatch(loginNormalUserRequest())
+export const asyncRegisterUser=(data,flag)=>async (dispatch,getState)=>{
+    dispatch(loginRequest())
     try{
-        let user=await fire.firebaseRegisterNormalUser(data);
-        console.log(user)
-        dispatch(loginNormalUserSuccess(user))
+        switch(flag){
+            case 'org':{
+                let orgdata=await api.registerOrg(data);
+                dispatch(loginSuccess(
+                    {
+                        data:orgdata.data.data,
+                        flag
+                    }
+                ))
+
+            }
+            break;
+            case 'user':{
+               let userData=await api.registerUser(data);
+               dispatch(loginSuccess(
+                {
+                    data:userData.data.data,
+                    flag
+                }
+            ))
+            }
+            break;
+            default: dispatch(loginFail("Please provide valid candidate details"))
+        }
+       
 
     }catch(err){
-        dispatch(loginNormalUserFail(err.message.slice(10)))
+        dispatch(loginFail(err.response.data.message || err.message))
         
     }
 }
 
-export const loginNormalUser=(data)=>async (dispatch,getState)=>{
+export const asyncLogin=(data,flag)=>async (dispatch,getState)=>{
     try{
-    dispatch(loginNormalUserRequest())
+        dispatch(loginRequest())
+        switch(flag){
+            case 'org':{
+                let orgdata=await api.loginOrg(data);
+                dispatch(loginSuccess(
+                    {
+                        data:orgdata.data.data,
+                        flag
+                    }
+                ))
 
-    let user=await fire.firebaseSignIn(data);
-    dispatch(loginNormalUserSuccess(user));
-
-    }catch(err){
-        dispatch(loginNormalUserFail(err.message.slice(10)))
-    }
-}
-
-export const loadNormalUser=()=>async (dispatch,getState)=>{
-    try{
-        const auth=getAuth();
-        onAuthStateChanged(auth,async (user)=>{
-            if(user){
-                let data=await fire.getUserData(user.uid)
-                dispatch(loadNormalUserRequest(data))
-
-
-            }else{
-                dispatch(needToSignIn())
             }
-        })
+            break;
+            case 'user':{
+                let userData=await api.loginUser(data);
+                dispatch(loginSuccess(
+                    {
+                        data:userData.data.data,
+                        flag
+                    }
+                ))
+            }
+            break;
+            default: dispatch(loginFail("Please provide valid candidate details"))
+        }
+
 
     }catch(err){
+        // dispatch(loginNormalUserFail(err.message.slice(10)))
+        dispatch(loginFail(err.response.data.message || err.message))
 
     }
 }
 
-export const logOutNormalUserAsync=()=>async (dispatch)=>{
+export const asyncLoadUser=()=>async (dispatch,getState)=>{
     try{
-        const auth = getAuth();
-         const status=await signOut(auth)
-         dispatch(logOutNormalUser())
+        dispatch(loadUserRequest())
+        let orgdata=await api.loadOrg();
 
+        dispatch(loadUser(
+            {
+                data:orgdata.data.data,
+                flag:'org'
+            }
+        ))
+        
+
+    }catch(err){
+        try{
+            let userData=await api.loadUser();
+            dispatch(loadUser(
+                {
+                    data:userData.data.data,
+                    flag:'user'
+                }
+            ))
+
+        }catch(err){
+            dispatch(needToSignIn(err.response.data.message))
+            console.clear();
+        }
+
+       
+    }
+}
+
+export const logOutAsync=(flag)=>async (dispatch)=>{
+    try{
+        // switch(flag){
+        //     case 'org':{
+        //         let orgdata=await api.logoutOrg();
+        //         dispatch(logOut())
+
+        //     }
+        //     break;
+        //     case 'user':{
+        //        let userData=await api.logoutUser();
+        //        dispatch(logOut())
+
+        //     }
+        //     break;
+        //     default: dispatch(loginFail("Please provide valid candidate details"))
+        // }
+        let userData=await api.logoutUser();
+               dispatch(logOut())
 
     }catch(err){
 
@@ -75,5 +149,5 @@ export const logOutNormalUserAsync=()=>async (dispatch)=>{
 export const clearErrorAsync=()=>(dispatch)=>{
     setTimeout((e)=>{
         dispatch(clearError());
-    },3000)
+    },2000)
 }

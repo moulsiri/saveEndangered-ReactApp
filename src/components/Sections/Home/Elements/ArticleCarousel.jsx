@@ -1,9 +1,12 @@
-import React from 'react'
+import {useState} from 'react'
 
 import Carousel from 'react-material-ui-carousel'
 import carouselImg from '../../../../assets/images/a-rhino.jpg';
 
 const ArticleCarousel = () => {
+  const [imgLoad,setImgLoad]=useState(false)
+
+
   return (
     <div id="h-article-carousel">
     <div className="h-a-elm">
@@ -17,7 +20,11 @@ const ArticleCarousel = () => {
       </div>
       <div className="h-a-img">
         <div className="a-img">
-          <img src={carouselImg} alt="" />
+          <img 
+           className={`smooth-image image-${
+            imgLoad ? 'visible' :  'hidden'}`}
+            onLoad={()=>setImgLoad(true)}
+          src={carouselImg} alt="" />
 
         </div>
 

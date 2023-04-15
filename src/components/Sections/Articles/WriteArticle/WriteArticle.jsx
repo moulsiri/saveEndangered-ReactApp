@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 
 import TextEditor from './TextEditor';
 import Logo from '../../../Nav/Logo';
@@ -9,36 +9,41 @@ import css from './writeArticle.module.scss'
 import BackButton from '../../../utils/BackButton';
 import BackgroundBlur from '../../../utils/BackgroundBlur';
 import ArticleForm from './ArticleForm';
+import Alert from '../../../utils/Alert'
 
+import { useNavigate } from 'react-router-dom';
+import { useSelector ,useDispatch} from 'react-redux';
 
 
 
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { clearArticleError } from '../../../../features/asyncActions/asyncArticles';
 
 
 
 
 const WriteArticle = () => {
-  const [value,setValue]=useState([
-    {
-      children:[
-        {
-          text:'Heading of the article',
-          type:'heading'
-        }
-      ],
-    },
-    {
-      children:[
-        {
-          text:'',
-          type:'paragraph'
-        }
-      ],
-    }
-  ])
+  const {isAuthenticated}=useSelector((s)=>s.normalUser)
+  const {error,success}=useSelector((s)=>s.articleData);
+  const dispatch=useDispatch()
+
+
+  const [value,setValue]=useState(null)
   const [open,setOpen]=useState(false);
+  const [openAlert,setOpenAlert]=useState(false);
+  const nevigate=useNavigate();
+
+  useEffect(()=>{
+    if(error){
+      setOpenAlert(true)
+      dispatch(clearArticleError())
+    }
+    if(success){
+      nevigate("/articles")
+    }
+
+  },[error,success])
 
   return (
     <>
@@ -60,10 +65,12 @@ const WriteArticle = () => {
         color="secondary" 
         onClick={()=>{
           setOpen(true)
-          console.log(value)
+          // console.log(value)
         }}
         size="small"
-        sx={{marginRight:'4em'}}>
+        sx={{marginRight:'4em'}}
+        disabled={value?false:true}
+        >
           Submit</Button>
         <User></User>
         </div>
@@ -81,6 +88,11 @@ const WriteArticle = () => {
       :<></>
     
     }
+    <Alert 
+    openAlert={openAlert} 
+    setOpenAlert={setOpenAlert}
+    mssg={error}
+    severity="error" />
     </>
   )
 }

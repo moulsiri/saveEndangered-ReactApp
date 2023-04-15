@@ -1,15 +1,14 @@
 import {useState} from 'react';
-import MainBackground from '../utils/MainBackground';
-import css from './Auth.module.scss';
 
 import { Link } from 'react-router-dom';
-import Logo from '../Nav/Logo';
 import { Box, Button, Paper, TextField, Typography } from '@mui/material';
+
 import RegisterForm from './RegisterForm';
+import MainBackground from '../../utils/MainBackground';
+import css from '../Auth.module.scss';
+import Logo from '../../Nav/Logo';
+import BackButton from '../../utils/BackButton';
 
-
-import Test from './Test';
-import BackButton from '../utils/BackButton';
 const Auth = () => {
   const [userLogin,setUserLogin]=useState(true)
 

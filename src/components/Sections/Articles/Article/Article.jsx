@@ -1,4 +1,4 @@
-import React from 'react'
+import {useEffect} from 'react'
 import SectionHero from '../../../utils/SectionHero';
 import SectionFooter from '../../../utils/SectionFooter'
 import PreviewImg from './PreviewImg';
@@ -6,6 +6,10 @@ import PreviewImg from './PreviewImg';
 
 import Typography from '@mui/material/Typography';
 import ImageGallery from '../../../utils/ImageGallery';
+
+
+import { useParams} from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 const itemData = [
@@ -40,24 +44,39 @@ const itemData = [
 
 ];
 const Article = () => {
+
+
+  let {id,i}=useParams()
+  const {articleList}=useSelector((s)=>s.publicData);
+  let content=[...articleList[i].content];
+  content.shift()
+  console.log(content)
+  const data=articleList[i]
+
+  useEffect(() => {
+    // 👇️ scroll to top on page load
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }, []);
+
+
   return (
     <>
     <SectionHero>
-      <PreviewImg></PreviewImg>
+      <PreviewImg img={data.previewImg.url} heading={data.heading} ></PreviewImg>
     </SectionHero>
     <section className="content">
-         <Typography variant="subtitle1" gutterBottom style={
+    <Typography variant="subtitle1" gutterBottom style={
       {margin:'0 auto',
       marginTop:'5vmin',
       color:"#634723" ,
       width:'80%'}}>
-         Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ex ea voluptate architecto! Officiis velit exercitationem nesciunt voluptates quia blanditiis magni placeat maxime totam, autem explicabo, facere voluptas alias odio. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos veritatis maxime officiis non error inventore eos similique. Inventore ipsam error corporis pariatur! Quibusdam porro labore assumenda quas ratione, et nobis?
-         Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ex ea voluptate architecto! Officiis velit exercitationem nesciunt voluptates quia blanditiis magni placeat maxime totam, autem explicabo, facere voluptas alias odio. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos veritatis maxime officiis non error inventore eos similique. Inventore ipsam error corporis pariatur! Quibusdam porro labore assumenda quas ratione, et nobis?
-         <br /><br />
-         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam exercitationem, consectetur provident deleniti quas molestiae ut autem eius magnam, quasi tempore adipisci doloremque odio quod aut similique itaque commodi laboriosam?Lorem ipsum dolor sit amet consectetur adipisicing elit. At minus beatae ab, mollitia, fuga corporis quibusdam eligendi cumque, sint odit accusamus! Quia aperiam similique iusto ea impedit voluptatum numquam. Eaque Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore maxime atque quibusdam quam corporis repudiandae? Dolor repellendus nulla autem. Delectus at, modi dolorum facere magni totam nemo? Labore, quidem soluta? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem labore et ratione odit blanditiis error nam, voluptates quos, ipsam sed quasi delectus minima deleniti soluta quas, distinctio neque? Blanditiis, debitis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut officiis necessitatibus doloremque, incidunt obcaecati veniam ipsum accusantium repudiandae, voluptates ratione sapiente ex, ut explicabo perferendis commodi? Incidunt delectus provident accusamus.
-         <br /><br />
-         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam exercitationem, consectetur provident deleniti quas molestiae ut autem eius magnam, quasi tempore adipisci doloremque odio quod aut similique itaque commodi laboriosam?Lorem ipsum dolor sit amet consectetur adipisicing elit. At minus beatae ab, mollitia, fuga corporis quibusdam eligendi cumque, sint odit accusamus! Quia aperiam similique iusto ea impedit voluptatum numquam. Eaque Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore maxime atque quibusdam quam corporis repudiandae? Dolor repellendus nulla autem. Delectus at, modi dolorum facere magni totam nemo? Labore, quidem soluta? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem labore et ratione odit blanditiis error nam, voluptates quos, ipsam sed quasi delectus minima deleniti soluta quas, distinctio neque? Blanditiis, debitis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut officiis necessitatibus doloremque, incidunt obcaecati veniam ipsum accusantium repudiandae, voluptates ratione sapiente ex, ut explicabo perferendis commodi? Incidunt delectus provident accusamus.
+          {
+        content.map((elm,i)=><>{elm.children.map((e,i)=>e.text)} <br /><br /> </>)
+      }
+    
          </Typography>
+      
+         
     </section>
     <SectionFooter>
     <ImageGallery data={itemData}></ImageGallery>

@@ -1,8 +1,10 @@
-import React from 'react'
+import {useState} from 'react'
+
+
 import {IoMdArrowDropright, IoMdCheckmarkCircleOutline} from 'react-icons/io'
 import { Link } from 'react-router-dom'
 
-import carouselImg from '../../../../assets/images/a-rhino.jpg';
+
 import bigStoryImg from '../../../../assets/images/loin&loiness.jpg';
 import author from '../../../../assets/images/writer.jpg';
 import articleImg from '../../../../assets/images/loin&loiness2.jpg'
@@ -10,6 +12,11 @@ import ArticleCarousel from './ArticleCarousel';
 
 
 const ExploreArticles = () => {
+  const [imgLoad1,setImgLoad1]=useState(false)
+  const [imgLoad2,setImgLoad2]=useState(false)
+  const [imgLoad3,setImgLoad3]=useState(false)
+
+
   return (
     <section id="exArticles">
       <div className="ex-prt1">
@@ -20,13 +27,23 @@ const ExploreArticles = () => {
          <div id="bg-picture">
         <div id="b-lft">
           <div id="b-img">
-            <img src={bigStoryImg} alt="" />
+            <img 
+            className={`smooth-image image-${
+              imgLoad1 ? 'visible' :  'hidden'}`}
+              onLoad={()=>setImgLoad1(true)}
+            src={bigStoryImg} alt="" />
             <div className="a-writer">
               <h3>article written by</h3>
               <div className="w-content">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum eos facere accusantium fugiat harum, minima adipisci possimus nulla quo</p>
                 <div className="a-img">
-                  <img src={author} alt="" />
+                  <img 
+                   className={`smooth-image image-${
+                    imgLoad2 ? 'visible' :  'hidden'}`}
+                    onLoad={()=>setImgLoad2(true)}
+                  
+                  src={author} 
+                  alt="" />
                 </div>
               </div>
               <div className="name">
@@ -38,7 +55,12 @@ const ExploreArticles = () => {
             </div>
             <div className="a-headline">
               <div id="a-hlft">
-                <img src={articleImg} alt="" />
+                <img 
+                 className={`smooth-image image-${
+                  imgLoad3 ? 'visible' :  'hidden'}`}
+                  onLoad={()=>setImgLoad3(true)}
+                src={articleImg} 
+                alt="" />
               </div>
               <div id="a-hrt">
               <div className="h-a-txt">

@@ -1,5 +1,8 @@
 import React from 'react'
 
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import { Box,Typography } from '@mui/material';
@@ -36,10 +39,12 @@ const ImageGallery = ({data}) => {
         <ImageListItem className="c-imgElm" key={item.img} cols={item.cols || 1} rows={item.rows || 1}>
           <img
           className="c-imgElm"
-            {...srcset(item.img, 121, item.rows, item.cols)}
+            {...srcset(item.img, 500, item.rows, item.cols)}
             alt={item.title}
             loading="lazy"
           />
+          
+          
         </ImageListItem>
       ))}
     </ImageList>
