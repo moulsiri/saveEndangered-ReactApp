@@ -31,7 +31,8 @@ import MainHomePage from './components/Sections/MainHomePage';
 import ProtectiveRoute from './components/utils/ProtectiveRoute';
 import OrganisationAuth from './components/Auth/Org/OrganisationAuth';
 import Article from './components/Sections/Articles/Article/Article';
-import { fetchArticleList, fetchOrdList } from './features/asyncActions/asyncPublicData';
+import { fetchArticleList } from './features/asyncActions/asyncArticleData';
+import { fetchOrgList } from './features/asyncActions/asyncOrgData';
 
 const App = () => {
  const dispatch=useDispatch();
@@ -70,7 +71,7 @@ const App = () => {
 
   useEffect(()=>{
     dispatch( asyncLoadUser())
-     dispatch(fetchOrdList());
+     dispatch(fetchOrgList());
      dispatch(fetchArticleList());
     //  dispatch(logOutAsync())
     //  console.log('helo')

@@ -1,6 +1,6 @@
 import {
     fetchArticleList
-} from '../asyncActions/asyncPublicData';
+} from '../asyncActions/asyncArticleData';
 
 import {
     CreateRequest,

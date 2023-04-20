@@ -1,4 +1,4 @@
-import React from 'react'
+import {useEffect} from 'react'
 
 import css from './About.module.scss';
 import SectionHero from '../../utils/SectionHero'
@@ -40,6 +40,11 @@ const itemData = [
 ];
 
 const About = () => {
+  useEffect(() => {
+    // 👇️ scroll to top on page load
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }, []);
+
   return (
     <>
     <SectionHero>

@@ -47,7 +47,7 @@ const Article = () => {
 
 
   let {id,i}=useParams()
-  const {articleList}=useSelector((s)=>s.publicData);
+  const {articleList}=useSelector((s)=>s.articles);
   let content=[...articleList[i].content];
   content.shift()
   console.log(content)

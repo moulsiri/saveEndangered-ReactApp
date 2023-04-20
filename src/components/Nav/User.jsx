@@ -73,6 +73,7 @@ const User = () => {
       <NotificationsNoneIcon color="action" />
     </Badge> */}
     <IconButton
+      className="user-Icon"
       onClick={handleClick}
       size="small"
       sx={{ ml: 2 }}

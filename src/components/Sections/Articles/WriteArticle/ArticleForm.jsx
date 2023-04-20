@@ -4,6 +4,8 @@ import css from './writeArticle.module.scss'
 //redux toolkit
 import { useSelector ,useDispatch} from 'react-redux';
 
+import LinearProgress from '@mui/material/LinearProgress';
+
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -13,6 +15,7 @@ import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import CircularProgress from '@mui/material/CircularProgress';
+
 import { createArticleAsync } from '../../../../features/asyncActions/asyncArticles';
 
 const style = {
@@ -28,7 +31,7 @@ const style = {
 };
 
 const ArticleForm = ({open,setOpen,content}) => {
-   const {orgList}=useSelector((s)=>s.publicData);
+   const orgData=useSelector((s)=>s.orgData);
    const {loading,error,success}=useSelector((s)=>s.articleData);
    const dispatch=useDispatch();
    
@@ -122,10 +125,11 @@ const ArticleForm = ({open,setOpen,content}) => {
     onChange={dataChangeHandler}
     required
   >
-    { (orgList.length!==0)?
-      orgList.map((elm,i)=><MenuItem key={`lsdkfi${i}`} value={elm._id}>{elm.name}</MenuItem>)
-      
-      :<MenuItem value='null'>Select an organisation</MenuItem>
+    { (!orgData.loading)
+    ?(orgData.success)
+      ? orgData.orgList.map((elm,i)=><MenuItem key={`lsdkfi${i}`} value={elm._id}>{elm.name}</MenuItem>)
+      :<MenuItem value='null'></MenuItem>
+      :<MenuItem value='null' sx={{display:'flex',justifyContent:'center'}}> <CircularProgress size='small' /></MenuItem>
     }
     </Select>
         </FormControl>

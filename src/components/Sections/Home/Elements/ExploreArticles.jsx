@@ -12,7 +12,7 @@ import ArticleCarousel from './ArticleCarousel';
 
 
 const ExploreArticles = () => {
-  const [imgLoad1,setImgLoad1]=useState(false)
+  const [imgLoad,setImgLoad]=useState(false)
   const [imgLoad2,setImgLoad2]=useState(false)
   const [imgLoad3,setImgLoad3]=useState(false)
 
@@ -29,8 +29,8 @@ const ExploreArticles = () => {
           <div id="b-img">
             <img 
             className={`smooth-image image-${
-              imgLoad1 ? 'visible' :  'hidden'}`}
-              onLoad={()=>setImgLoad1(true)}
+              imgLoad ? 'visible' :  'hidden'}`}
+              onLoad={()=>setImgLoad(true)}
             src={bigStoryImg} alt="" />
             <div className="a-writer">
               <h3>article written by</h3>

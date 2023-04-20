@@ -104,6 +104,7 @@ export const asyncLoadUser=()=>async (dispatch,getState)=>{
 
     }catch(err){
         try{
+            console.clear();
             let userData=await api.loadUser();
             dispatch(loadUser(
                 {
